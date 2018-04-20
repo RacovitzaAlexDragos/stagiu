@@ -39,6 +39,9 @@
                     <p class="label">Numar de elemente</p>
                     <input type="text" name="iterations"/>
 
+                    <p class="label">Numar de comparat</p>
+                    <input type="text" name="compare"/>
+
                     <br/><br/>
                     <input type="submit"/>
                 </form>
@@ -53,5 +56,86 @@
 if (!$_POST) {
     exit;
 }
+if(empty($_POST['startPoint'])|| empty($_POST['endPoint']))
+{
+    echo "Completati campurile";
+    exit;
+}
+
+if(!empty($_POST['iterations'])&& $_POST['iterations']<1){
+    echo "Introduceti numere pozitive";
+    exit;
+}
+//Compara suma numerelor divizibile cu 5 cu un numar introdus de un uitilizator
+function comparare($x,$y){
+    if($x>=$y){
+        echo "Suma este mai mare ca numarul de comparat";
+    }
+    else
+        echo "Numarul de comparat este mai mare ca suma";
+}
+
 echo "<pre>";
-print_r($_POST);
+$nr1=0;
+$suma=0;
+$comparare=$_POST['compare'];
+$myArray=range($_POST['startPoint']+1,$_POST['endPoint']-1);
+rsort($myArray);
+if(!empty($_POST['iterations'])){
+    $myArray=array_slice($myArray,0,$_POST['iterations']);
+}
+//$myArraarray_slice(range($_POST['startPoint']+1,$_POST['endPoint']-1),0,$_POST['iterations']);
+print_r($myArray);
+//parcurge un array aduna numerele si le imparte la numarul de iteratii
+function media($myArray=[]){
+    $media=0;
+    foreach ($myArray as $key=>$value) {
+        $numar = $_POST['iterations'];
+        $media += $value / $numar;
+    }
+    return $media;
+}
+/*function modul($myArray=[],$modul){
+    $nr=0;
+    $suma=0;
+    foreach ($myArray as $key=>$value){
+        if($value%$modul==0){
+            $nr++;
+            $suma+= $value;
+        }
+        echo $nr;
+        echo $suma;
+    }
+}*/
+foreach ($myArray as $key=>$value){
+    if($value%3==0){
+        echo "numarul  ".  $value. " este divizibil cu 3\n";
+
+        }
+
+        if($value%4==0){
+      $nr1++;
+ }
+    if  ($value%5==0) {
+        $suma+= $value;
+    }
+
+}
+
+/*for($i=$_POST['startPoint']+1; $i<$_POST['endPoint'];$i++)
+{
+    $myArray[] = $i;
+    if($_POST['iterations']==count($myArray)){
+        break;
+    }
+
+}*/
+echo "avem " .$nr1. " divizibile cu 4\n";
+echo "suma ". $suma. " este divizibila cu 5";
+
+echo " ". comparare($suma,$comparare);
+
+echo  " Media numerelor din Array este". media($myArray=range($_POST['startPoint']+1,$_POST['endPoint']-1));
+
+//echo "Rezultatele sunt" .modul($myArray=range($_POST['startPoint']+1,$_POST['endPoint']-1),5);
+
