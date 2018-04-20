@@ -53,58 +53,5 @@
 if (!$_POST) {
     exit;
 }
-if(empty($_POST['startPoint'])|| empty($_POST['endPoint']))
-{
-    echo "Completati campurile";
-    exit;
-}
-
-if(!empty($_POST['iterations'])&& $_POST['iterations']<1){
-    echo "Introduceti numere pozitive";
-    exit;
-}
-
 echo "<pre>";
-function modulo($impartit,$modul)
-{
-    $rezultat=0;
-    $rezultat=$impartit%$modul;
-    return $rezultat;
-
-}
-$nr1=0;
-$suma=0;
-$myArray=range($_POST['startPoint']+1,$_POST['endPoint']-1);
-if(!empty($_POST['iterations'])){
-    $myArray=array_slice($myArray,0,$_POST['iterations']);
-}
-//$myArraarray_slice(range($_POST['startPoint']+1,$_POST['endPoint']-1),0,$_POST['iterations']);
-print_r($myArray);
-foreach ($myArray as $key=>$value){
-    if($value%3==0){
-        echo "numarul  ".  $value. " este divizibil cu 3\n";
-
-    }
-
-    if($value%4==0){
-     $nr1++;
- }
-    if  ($value%5==0){
-    $suma+=$value;
-
-}
-}
-
-/*for($i=$_POST['startPoint']+1; $i<$_POST['endPoint'];$i++)
-{
-    $myArray[] = $i;
-    if($_POST['iterations']==count($myArray)){
-        break;
-    }
-
-}*/
-echo "avem " .$nr1. " divizibile cu 4\n";
-echo "suma ". $suma. " este divizibila cu 5";
-
-
-
+print_r($_POST);
